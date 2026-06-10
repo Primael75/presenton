@@ -1,0 +1,32 @@
+services:
+  presenton:
+    image: thales/presenton:synthia-v1
+    build:
+      context: ../..
+      dockerfile: Dockerfile
+    container_name: presenton-synthia
+    ports:
+      - "127.0.0.1:5050:80"
+    volumes:
+      - presenton_data:/app_data
+    environment:
+      # Auth
+      - AUTH_USERNAME=${PRESENTON_USERNAME:-admin}
+      - AUTH_PASSWORD=${PRESENTON_PASSWORD:-synthia2024}
+      - CAN_CHANGE_KEYS=false
+      - DISABLE_AUTH=false
+      # LLM
+      - LLM=google
+      - GOOGLE_API_KEY=${GOOGLE_API_KEY}
+      - GOOGLE_MODEL=models/gemini-2.5-flash
+      # Images
+      - IMAGE_PROVIDER=pexels
+      - PEXELS_API_KEY=${PEXELS_API_KEY}
+      # Options
+      - MEM0_ENABLED=false
+      - WEB_GROUNDING=false
+      - MIGRATE_DATABASE_ON_STARTUP=true
+    restart: unless-stopped
+
+volumes:
+  presenton_data:
