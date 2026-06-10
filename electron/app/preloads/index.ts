@@ -49,6 +49,6 @@ contextBridge.exposeInMainWorld('electron', {
   },
   // API handlers
   hasRequiredKey: () => ipcRenderer.invoke("api:has-required-key"),
-  telemetryStatus: () => ipcRenderer.invoke("api:telemetry-status"),
+  // telemetryStatus: () => ipcRenderer.invoke("api:telemetry-status"),  // Removed: telemetry consumer deleted from Next.js (Synthia fork)
   getTemplates: () => ipcRenderer.invoke("api:templates"),
 });

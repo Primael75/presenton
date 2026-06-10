@@ -11,7 +11,7 @@
 
 "use client";
 import React, { useState } from "react";
-import { useRouter, usePathname } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { useDispatch, useSelector } from "react-redux";
 import { clearOutlines, setPresentationId } from "@/store/slices/presentationGeneration";
 import { PromptInput } from "./PromptInput";
@@ -24,7 +24,6 @@ import { PresentationGenerationApi } from "../../services/api/presentation-gener
 import { OverlayLoader } from "@/components/ui/overlay-loader";
 import Wrapper from "@/components/Wrapper";
 import { setPptGenUploadState } from "@/store/slices/presentationGenUpload";
-import { trackEvent, MixpanelEvent } from "@/utils/mixpanel";
 import { ConfigurationSelects } from "./ConfigurationSelects";
 import { RootState } from "@/store/store";
 import { ImagesApi } from "../../services/api/images";
@@ -113,7 +112,6 @@ const getSelectedImageQuality = (config?: LLMConfig): string => {
 
 const UploadPage = () => {
   const router = useRouter();
-  const pathname = usePathname();
   const dispatch = useDispatch();
   const llmConfig = useSelector((state: RootState) => state.userConfig.llm_config);
 
@@ -147,7 +145,6 @@ const UploadPage = () => {
       config.slides && /^\d+$/.test(config.slides) ? Number(config.slides) : null;
 
     return {
-      pathname,
       generation_path: files.length > 0 ? "documents" : "prompt_only",
       slides_selected: parsedSlides,
       slides_mode: config.slides ? "selected" : "auto",
@@ -171,13 +168,6 @@ const UploadPage = () => {
       image_provider: imageGenerationEnabled ? (llmConfig?.IMAGE_PROVIDER || "") : "disabled",
       image_quality: imageGenerationEnabled ? getSelectedImageQuality(llmConfig) : "",
     };
-  };
-
-  const trackUploadValidationFailure = (reason: string) => {
-    trackEvent(MixpanelEvent.Upload_Configuration_Invalid, {
-      ...getUploadSnapshotProps(),
-      reason,
-    });
   };
 
   const handleConfigChange = (key: keyof PresentationConfig, value: unknown) => {
@@ -221,19 +211,16 @@ const UploadPage = () => {
    */
   const validateConfiguration = (): boolean => {
     if (!config.language) {
-      trackUploadValidationFailure("language_missing");
       notify.warning("Language required", "Please select a language.");
       return false;
     }
 
     if (files.length > 0 && config.language === LanguageType.Auto) {
-      trackUploadValidationFailure("language_auto_with_documents");
       notify.warning("Language required", "Please choose a language before processing uploaded documents.");
       return false;
     }
 
     if (!config.prompt.trim() && files.length === 0) {
-      trackUploadValidationFailure("prompt_or_document_missing");
       notify.warning("Input required", "Provide a prompt or upload at least one document.");
       return false;
     }
@@ -245,12 +232,9 @@ const UploadPage = () => {
    */
   const handleGeneratePresentation = async () => {
     if (!validateConfiguration()) return;
-    trackEvent(MixpanelEvent.Upload_Generation_Started, getUploadSnapshotProps());
-
 
     const isStockProviderReady = await ensureStockImageProviderReady();
     if (!isStockProviderReady) {
-      trackUploadValidationFailure("stock_image_provider_unreachable");
       return;
     }
 
@@ -304,13 +288,6 @@ const UploadPage = () => {
       files: responses,
     }));
     dispatch(clearOutlines())
-    trackEvent(MixpanelEvent.Upload_Documents_Processed, {
-      ...getUploadSnapshotProps(),
-      uploaded_documents_count: documents.length,
-      decompose_job_count: responses.length,
-      destination: "/documents-preview",
-    });
-    trackEvent(MixpanelEvent.Navigation, { from: pathname, to: "/documents-preview" });
     router.push("/documents-preview");
   };
 
@@ -344,12 +321,6 @@ const UploadPage = () => {
 
     dispatch(setPresentationId(createResponse.id));
     dispatch(clearOutlines())
-    trackEvent(MixpanelEvent.Upload_Outline_Generation_Requested, {
-      ...getUploadSnapshotProps(),
-      presentation_id: createResponse.id,
-      destination: "/outline",
-    });
-    trackEvent(MixpanelEvent.Navigation, { from: pathname, to: "/outline" });
     router.push("/outline");
   };
 

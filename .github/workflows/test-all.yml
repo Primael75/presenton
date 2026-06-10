@@ -54,7 +54,7 @@ jobs:
         echo "TEMP_DIRECTORY=/tmp/presenton" >> $GITHUB_ENV
         echo "PUPPETEER_EXECUTABLE_PATH=/usr/bin/chromium" >> $GITHUB_ENV
         echo "DATABASE_URL=sqlite+aiosqlite:///./test.db" >> $GITHUB_ENV
-        echo "DISABLE_ANONYMOUS_TRACKING=true" >> $GITHUB_ENV
+        # echo "DISABLE_ANONYMOUS_TRACKING=true" >> $GITHUB_ENV  # Removed: telemetry stripped from source (Synthia fork)
         echo "DISABLE_IMAGE_GENERATION=true" >> $GITHUB_ENV
 
     - name: Build FastAPI binary

@@ -15,8 +15,7 @@ import PresentationMode from "./PresentationMode";
 import SidePanel from "./SidePanel";
 import SlideContent from "./SlideContent";
 import { Button } from "@/components/ui/button";
-import { usePathname, useRouter } from "next/navigation";
-import { trackEvent, MixpanelEvent } from "@/utils/mixpanel";
+import { useRouter } from "next/navigation";
 import { AlertCircle } from "lucide-react";
 import {
   usePresentationStreaming,
@@ -34,7 +33,6 @@ import Chat from "./Chat";
 const PresentationPage: React.FC<PresentationPageProps> = ({
   presentation_id,
 }) => {
-  const pathname = usePathname();
   // State management
   const [loading, setLoading] = useState(true);
   const [selectedSlide, setSelectedSlide] = useState(0);
@@ -130,14 +128,6 @@ const PresentationPage: React.FC<PresentationPageProps> = ({
     return () => window.cancelAnimationFrame(frame);
   }, [isStreaming, lastStreamingSlideIndex, slidesLength]);
 
-  useEffect(() => {
-    trackEvent(MixpanelEvent.Presentation_Editor_Viewed, {
-      pathname,
-      presentation_id,
-      stream_mode: !!stream,
-      presentation_mode: isPresentMode ? "present" : "edit",
-    });
-  }, [pathname, presentation_id, stream, isPresentMode]);
 
   /** Editor tree unmounts in present mode; remount loses inline theme CSS — re-apply from Redux. */
   useLayoutEffect(() => {
@@ -278,8 +268,8 @@ const PresentationPage: React.FC<PresentationPageProps> = ({
           </p>
           <div className="flex gap-2 justify-center items-center">
 
-            <Button onClick={() => { trackEvent(MixpanelEvent.PresentationPage_Refresh_Page_Button_Clicked, { pathname }); window.location.reload(); }}>Refresh Page</Button>
-            <Button onClick={() => { trackEvent(MixpanelEvent.Navigation, { from: pathname, to: "/upload" }); router.push("/upload"); }}>Go to Upload</Button>
+            <Button onClick={() => { window.location.reload(); }}>Refresh Page</Button>
+            <Button onClick={() => { router.push("/upload"); }}>Go to Upload</Button>
           </div>
         </div>
       </div>

@@ -1,14 +1,12 @@
 import { useState, useCallback } from "react";
 import { useDispatch } from "react-redux";
-import { usePathname, useRouter } from "next/navigation";
+import { useRouter } from "next/navigation";
 import { notify } from "@/components/ui/sonner";
 import { clearPresentationData } from "@/store/slices/presentationGeneration";
 import { PresentationGenerationApi } from "../../services/api/presentation-generation";
 import { LoadingState, TABS } from "../types/index";
 import { TemplateLayoutsWithSettings } from "@/app/presentation-templates/utils";
 import { getCustomTemplateDetails } from "@/app/hooks/useCustomTemplates";
-import { MixpanelEvent, trackEvent } from "@/utils/mixpanel";
-
 const DEFAULT_LOADING_STATE: LoadingState = {
   message: "",
   isLoading: false,
@@ -24,7 +22,6 @@ export const usePresentationGeneration = (
 ) => {
   const dispatch = useDispatch();
   const router = useRouter();
-  const pathname = usePathname();
   const [loadingState, setLoadingState] = useState<LoadingState>(
     DEFAULT_LOADING_STATE
   );
@@ -91,16 +88,6 @@ export const usePresentationGeneration = (
       typeof selectedTemplate === "string"
         ? null
         : selectedTemplate?.layouts?.length || 0;
-
-    trackEvent(MixpanelEvent.Outline_Presentation_Generation_Started, {
-      pathname,
-      presentation_id: presentationId,
-      outline_count: outlines?.length || 0,
-      template_id: selectedTemplateId,
-      template_type: selectedTemplateType,
-      template_name: selectedTemplateName,
-      template_layout_count: selectedTemplateLayoutCount,
-    });
 
     setLoadingState({
       message: "Generating presentation data...",
@@ -202,7 +189,6 @@ export const usePresentationGeneration = (
     dispatch,
     router,
     selectedTemplate,
-    pathname,
   ]);
 
   return { loadingState, handleSubmit };

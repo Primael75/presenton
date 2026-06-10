@@ -329,7 +329,8 @@ These variables match `docker-compose.yml`. **`IMAGE_PROVIDER`** selects the bac
 
 #### Telemetry
 
-- **DISABLE_ANONYMOUS_TRACKING**=[true/false]: Set to **true** to disable anonymous telemetry.
+~~- **DISABLE_ANONYMOUS_TRACKING**=[true/false]: Set to **true** to disable anonymous telemetry.~~
+<!-- Removed: anonymous telemetry has been fully removed from this build (Synthia fork) -->
 
 #### Authentication (web login)
 

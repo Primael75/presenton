@@ -12,8 +12,6 @@ import { notify } from '@/components/ui/sonner';
 import ToolTip from '../ToolTip';
 import { Switch } from '../ui/switch';
 import { Select, SelectItem, SelectContent, SelectValue, SelectTrigger } from '../ui/select';
-import { MixpanelEvent, trackEvent } from '@/utils/mixpanel';
-import { usePathname } from 'next/navigation';
 import { getLLMConfigValidationError, handleSaveLLMConfig } from '@/utils/storeHelpers';
 import { checkIfSelectedOllamaModelIsPulled, pullOllamaModel } from '@/utils/providerUtils';
 import { getApiUrl } from '@/utils/api';
@@ -25,7 +23,6 @@ import OpenAICompatibleImageFields from '@/components/OpenAICompatibleImageField
 const MANUAL_MODEL_PROVIDERS = new Set(["vertex", "azure", "bedrock"]);
 
 const PresentonMode = ({ currentStep, setStep }: { currentStep: number, setStep: (step: number) => void }) => {
-    const pathname = usePathname();
     const [openProviderSelect, setOpenProviderSelect] = useState(false);
     const [openImageProviderSelect, setOpenImageProviderSelect] = useState(false);
     const userConfigState = useSelector((state: RootState) => state.userConfig);
@@ -455,20 +452,6 @@ const PresentonMode = ({ currentStep, setStep }: { currentStep: number, setStep:
             const textModel = getSelectedTextModel(llmConfig);
             const imageGenerationEnabled = !llmConfig.DISABLE_IMAGE_GENERATION;
             const imageProvider = imageGenerationEnabled ? (llmConfig.IMAGE_PROVIDER || '') : 'disabled';
-
-            trackEvent(MixpanelEvent.Onboarding_Providers_Models_Selected, {
-                pathname,
-                text_provider: textProvider,
-                text_provider_label: LLM_PROVIDERS[textProvider]?.label || textProvider || '',
-                text_model: textModel,
-                uses_chatgpt_login: textProvider === 'chatgpt',
-                image_generation_enabled: imageGenerationEnabled,
-                image_provider: imageProvider,
-                image_provider_label: imageGenerationEnabled
-                    ? (IMAGE_PROVIDERS[imageProvider]?.label || imageProvider || '')
-                    : 'Image generation disabled',
-                image_quality: imageGenerationEnabled ? getSelectedImageQuality(llmConfig) : ''
-            });
 
             notify.success("Configuration saved", "Your configuration was saved successfully.");
             setStep(3)
