@@ -680,6 +680,17 @@ import TeamSlideLayout, {
   layoutDescription as TeamDesc,
 } from "./general/TeamSlideLayout";
 
+// Synthia templates
+import CoverSlideLayout, { Schema as CoverSchema, layoutId as CoverId, layoutName as CoverName, layoutDescription as CoverDesc } from "./synthia/CoverSlideLayout";
+import SectionSlideLayout, { Schema as SectionSchema, layoutId as SectionId, layoutName as SectionName, layoutDescription as SectionDesc } from "./synthia/SectionSlideLayout";
+import BulletSlideLayout, { Schema as BulletSchema, layoutId as BulletId, layoutName as BulletName, layoutDescription as BulletDesc } from "./synthia/BulletSlideLayout";
+import TwoColumnSlideLayout, { Schema as TwoColSchema, layoutId as TwoColId, layoutName as TwoColName, layoutDescription as TwoColDesc } from "./synthia/TwoColumnSlideLayout";
+import ThreeIconsSlideLayout, { Schema as ThreeIconsSchema, layoutId as ThreeIconsId, layoutName as ThreeIconsName, layoutDescription as ThreeIconsDesc } from "./synthia/ThreeIconsSlideLayout";
+import BigNumberSlideLayout, { Schema as BigNumberSchema, layoutId as BigNumberId, layoutName as BigNumberName, layoutDescription as BigNumberDesc } from "./synthia/BigNumberSlideLayout";
+import SynthiaQuoteSlideLayout, { Schema as SynthiaQuoteSchema, layoutId as SynthiaQuoteId, layoutName as SynthiaQuoteName, layoutDescription as SynthiaQuoteDesc } from "./synthia/QuoteSlideLayout";
+import ConclusionSlideLayout, { Schema as ConclusionSchema, layoutId as ConclusionId, layoutName as ConclusionName, layoutDescription as ConclusionDesc } from "./synthia/ConclusionSlideLayout";
+import MapSlideLayout, { Schema as MapSchema, layoutId as MapId, layoutName as MapName, layoutDescription as MapDesc } from "./synthia/MapSlideLayout";
+
 // Neo general templates
 import HeadlineTextWithBulletsAndStatsLayout, {
   Schema as HeadlineTextWithBulletsAndStatsSchema,
@@ -1364,10 +1375,23 @@ import educationSettings from "./Education/settings.json";
 import productOverviewSettings from "./ProductOverview/settings.json";
 import reportSettings from "./Report/settings.json";
 import pitchDeckSettings from "./pitch-deck/settings.json";
+import synthiaSettings from "./synthia/settings.json";
 
 // Helper to create template entry
 
 // TODO: Step 3: Create template entries for each template (like the ones below)
+
+export const synthiaTemplates: TemplateWithData[] = [
+  createTemplateEntry(CoverSlideLayout, CoverSchema, CoverId, CoverName, CoverDesc, "synthia", "CoverSlideLayout"),
+  createTemplateEntry(SectionSlideLayout, SectionSchema, SectionId, SectionName, SectionDesc, "synthia", "SectionSlideLayout"),
+  createTemplateEntry(BulletSlideLayout, BulletSchema, BulletId, BulletName, BulletDesc, "synthia", "BulletSlideLayout"),
+  createTemplateEntry(TwoColumnSlideLayout, TwoColSchema, TwoColId, TwoColName, TwoColDesc, "synthia", "TwoColumnSlideLayout"),
+  createTemplateEntry(ThreeIconsSlideLayout, ThreeIconsSchema, ThreeIconsId, ThreeIconsName, ThreeIconsDesc, "synthia", "ThreeIconsSlideLayout"),
+  createTemplateEntry(BigNumberSlideLayout, BigNumberSchema, BigNumberId, BigNumberName, BigNumberDesc, "synthia", "BigNumberSlideLayout"),
+  createTemplateEntry(SynthiaQuoteSlideLayout, SynthiaQuoteSchema, SynthiaQuoteId, SynthiaQuoteName, SynthiaQuoteDesc, "synthia", "QuoteSlideLayout"),
+  createTemplateEntry(ConclusionSlideLayout, ConclusionSchema, ConclusionId, ConclusionName, ConclusionDesc, "synthia", "ConclusionSlideLayout"),
+  createTemplateEntry(MapSlideLayout, MapSchema, MapId, MapName, MapDesc, "synthia", "MapSlideLayout"),
+];
 
 export const codeTemplates: TemplateWithData[] = [
   createTemplateEntry(
@@ -3384,6 +3408,7 @@ export const swiftTemplates: TemplateWithData[] = [
 // TODO: Step 4: Combine all templates into a single array For UseCases (like the ones below)
 // All templates combined
 export const allLayouts: TemplateWithData[] = [
+  ...synthiaTemplates,
   ...neoGeneralTemplates,
   ...neoModernTemplates,
   ...neoStandardTemplates,
@@ -3402,6 +3427,13 @@ export const allLayouts: TemplateWithData[] = [
 // TODO: Step 5: Combine all templates into a single array For UseCases (like the ones below)
 // For UseCases we need to combine all templates into a single array with settings
 export const templates: TemplateLayoutsWithSettings[] = [
+  {
+    id: "synthia",
+    name: "Synthia",
+    description: synthiaSettings.description,
+    settings: synthiaSettings as TemplateGroupSettings,
+    layouts: synthiaTemplates,
+  },
   {
     id: "general",
     name: "General",
