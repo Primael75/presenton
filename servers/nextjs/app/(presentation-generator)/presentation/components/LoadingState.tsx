@@ -54,7 +54,7 @@ const LoadingState = () => {
                     aspect-ratio: 1;
                     --_c: no-repeat radial-gradient(
                         farthest-side,
-                        #7a5af8 92%,
+                        #4791cc 92%,
                         #0000
                     );
                     background:

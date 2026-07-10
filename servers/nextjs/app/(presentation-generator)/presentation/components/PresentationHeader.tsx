@@ -535,8 +535,7 @@ const PresentationHeader = ({
               <button
                 className="flex  items-center gap-[7px] px-[18px] py-[11px] rounded-[53px] text-sm font-semibold text-[#101323]"
                 style={{
-                  background:
-                    "linear-gradient(270deg, #D5CAFC 2.4%, #E3D2EB 27.88%, #F4DCD3 69.23%, #FDE4C2 100%)",
+                  background: "#005B9A",
                 }}
                 disabled={isExporting || isStreaming === true}
               >

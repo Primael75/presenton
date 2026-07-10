@@ -218,13 +218,13 @@ export default function AuthGate() {
               className="mx-auto mb-5 h-12 w-auto opacity-95"
               priority
             />
-            <div className="mx-auto mb-4 h-1 w-16 rounded-full bg-[#7C51F8]" />
+            <div className="mx-auto mb-4 h-1 w-16 rounded-full bg-[#005B9A]" />
             <h1 className="font-syne text-lg font-semibold text-black">Synthia</h1>
             <p className="mt-3 font-syne text-sm text-[#000000CC]">Preparing your workspace…</p>
             <div className="mt-6 flex justify-center gap-1.5">
               <span className="h-2 w-2 animate-pulse rounded-full bg-[#5146E5]" />
               <span
-                className="h-2 w-2 animate-pulse rounded-full bg-[#7C51F8]"
+                className="h-2 w-2 animate-pulse rounded-full bg-[#005B9A]"
                 style={{ animationDelay: "0.2s" }}
               />
               <span
@@ -243,18 +243,25 @@ export default function AuthGate() {
       <section className="relative z-10 w-full max-w-xl rounded-2xl border border-[#E1E1E5] bg-white p-7 shadow-xl sm:p-10">
         <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-start sm:justify-between">
           <div className="flex items-center gap-4">
-            <div className="flex h-[74px] w-[74px] shrink-0 items-center justify-center rounded-[4px] bg-[#F4F3FF] p-3">
+            <div className="flex h-[74px] w-[74px] shrink-0 items-center justify-center rounded-[4px] p-3">
               <Image
                 src="/synthia-logo.png"
                 alt=""
                 width={40}
                 height={40}
-                className="h-10 w-10 object-contain"
+                style={{
+                  background: "#0D1B2A",
+                  borderRadius: "8px",
+                  padding: "4px",
+                  height: "40px",
+                  width: "auto",
+                  objectFit: "contain",
+                }}
               />
             </div>
             <div>
-              <p className="font-syne text-[10px] font-semibold uppercase tracking-[0.14em] text-[#7A5AF8]">
-                Secure instance
+              <p className="font-syne text-[10px] font-semibold uppercase tracking-[0.14em] text-[#4791CC]">
+                Accès sécurisé
               </p>
               <h1 className="mt-1 font-syne text-2xl font-semibold leading-tight text-black sm:text-[26px]">
                 {isSetupMode ? "Create your admin login" : "Sign in to continue"}
@@ -328,7 +335,7 @@ export default function AuthGate() {
           <button
             type="submit"
             disabled={isSubmitting}
-            className="w-full rounded-[58px] border border-[#EDEEEF] bg-[#7C51F8] px-5 py-3 font-syne text-xs font-semibold text-white transition hover:bg-[#6d46e6] disabled:cursor-not-allowed disabled:opacity-60"
+            className="w-full rounded-[58px] border border-[#EDEEEF] bg-[#005B9A] px-5 py-3 font-syne text-xs font-semibold text-white transition hover:bg-[#00497B] disabled:cursor-not-allowed disabled:opacity-60"
           >
             {isSubmitting
               ? isSetupMode

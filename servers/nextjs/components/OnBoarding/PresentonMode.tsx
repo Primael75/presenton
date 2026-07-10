@@ -480,7 +480,7 @@ const PresentonMode = ({ currentStep, setStep }: { currentStep: number, setStep:
 
     return (
         <div className='w-full max-w-[660px] font-syne pb-10'>
-            <p className='px-2.5 py-0.5 w-fit text-[#7A5AF8] rounded-[50px]  border border-[#EDEEEF] text-[10px] font-medium mb-5 font-syne'>PRESENTON</p>
+            <p className='px-2.5 py-0.5 w-fit text-[#4791CC] rounded-[50px]  border border-[#EDEEEF] text-[10px] font-medium mb-5 font-syne'>PRESENTON</p>
             <div className=''>
 
                 <h2 className='mb-4 text-black text-[26px] font-normal font-unbounded '>Choose your content providers</h2>
@@ -1227,7 +1227,7 @@ const PresentonMode = ({ currentStep, setStep }: { currentStep: number, setStep:
 
                     disabled={savingConfig}
                     onClick={handleSaveConfig}
-                    className='border font-syne border-[#EDEEEF] bg-[#7C51F8]  rounded-[58px] px-5 py-2.5 text-white text-xs  font-semibold'>
+                    className='border font-syne border-[#EDEEEF] bg-[#005B9A]  rounded-[58px] px-5 py-2.5 text-white text-xs  font-semibold'>
                     Continue to Finish
                 </button>
             </div>

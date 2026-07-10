@@ -360,7 +360,7 @@ const IconsEditor = ({
                         <span
                           className={cn(
                             "truncate text-xs ",
-                            isSelected ? "text-[#7A5AF8]" : "text-[#666666]"
+                            isSelected ? "text-[#4791CC]" : "text-[#666666]"
                           )}
                         >
                           {ICON_WEIGHT_LABELS[weight]}

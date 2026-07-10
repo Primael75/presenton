@@ -159,7 +159,7 @@ export function ConfigurationInitializer({ children }: { children: React.ReactNo
                 alt="Synthia"
                 className="mx-auto mb-4 h-12 opacity-90"
               />
-              <div className="mx-auto h-1 w-16 rounded-full bg-[#7C51F8]" />
+              <div className="mx-auto h-1 w-16 rounded-full bg-[#005B9A]" />
             </div>
 
             {/* Loading Text */}

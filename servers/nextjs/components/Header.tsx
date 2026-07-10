@@ -10,7 +10,7 @@ const Header: React.FC = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center gap-2">
-            <img src="/synthia-logo.png" alt="Synthia" className="h-6 w-auto" />
+            <img src="/synthia-logo.png" alt="Synthia" style={{ background: "#0D1B2A", borderRadius: "8px", padding: "4px", height: "40px", width: "auto", objectFit: "contain" }} />
           </Link>
 
           <nav className="flex items-center gap-4">

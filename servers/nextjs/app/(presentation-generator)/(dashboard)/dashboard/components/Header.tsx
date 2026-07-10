@@ -46,7 +46,14 @@ const Header = () => {
               <img
                 src="/synthia-logo.png"
                 alt="Synthia logo"
-                className="h-[40px] w-[40px]"
+                style={{
+                  background: "#0D1B2A",
+                  borderRadius: "8px",
+                  padding: "4px",
+                  height: "40px",
+                  width: "auto",
+                  objectFit: "contain",
+                }}
               />
             </Link>
           </div>

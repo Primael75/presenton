@@ -13,7 +13,7 @@ services:
       # Auth
       - AUTH_USERNAME=${PRESENTON_USERNAME:-admin}
       - AUTH_PASSWORD=${PRESENTON_PASSWORD:-synthia2024}
-      - CAN_CHANGE_KEYS=false
+      - CAN_CHANGE_KEYS=true
       - DISABLE_AUTH=false
       # LLM
       - LLM=google
