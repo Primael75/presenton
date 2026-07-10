@@ -449,7 +449,7 @@ const PresentationHeader = ({
             onClick={() => {
               router.push("/dashboard");
             }}
-            src="/logo-with-bg.png"
+            src="/synthia-logo.png"
             alt=""
             className="w-10 h-10 cursor-pointer object-contain"
           />

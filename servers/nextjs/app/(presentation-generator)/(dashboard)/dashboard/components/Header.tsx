@@ -44,8 +44,8 @@ const Header = () => {
           <div className="flex items-center gap-3">
             <Link href="/dashboard">
               <img
-                src="/logo-with-bg.png"
-                alt="Presentation logo"
+                src="/synthia-logo.png"
+                alt="Synthia logo"
                 className="h-[40px] w-[40px]"
               />
             </Link>

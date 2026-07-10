@@ -211,15 +211,15 @@ export default function AuthGate() {
         <div className="relative z-10 w-full max-w-md">
           <div className="rounded-2xl border border-[#EDEEEF] bg-white p-8 text-center shadow-xl">
             <Image
-              src="/Logo.png"
-              alt="Presenton"
+              src="/synthia-logo.png"
+              alt="Synthia"
               width={160}
               height={48}
               className="mx-auto mb-5 h-12 w-auto opacity-95"
               priority
             />
             <div className="mx-auto mb-4 h-1 w-16 rounded-full bg-[#7C51F8]" />
-            <h1 className="font-syne text-lg font-semibold text-black">Presenton</h1>
+            <h1 className="font-syne text-lg font-semibold text-black">Synthia</h1>
             <p className="mt-3 font-syne text-sm text-[#000000CC]">Preparing your workspace…</p>
             <div className="mt-6 flex justify-center gap-1.5">
               <span className="h-2 w-2 animate-pulse rounded-full bg-[#5146E5]" />
@@ -245,7 +245,7 @@ export default function AuthGate() {
           <div className="flex items-center gap-4">
             <div className="flex h-[74px] w-[74px] shrink-0 items-center justify-center rounded-[4px] bg-[#F4F3FF] p-3">
               <Image
-                src="/logo-with-bg.png"
+                src="/synthia-logo.png"
                 alt=""
                 width={40}
                 height={40}
