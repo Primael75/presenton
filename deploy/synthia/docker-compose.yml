@@ -18,7 +18,7 @@ services:
       # LLM
       - LLM=google
       - GOOGLE_API_KEY=${GOOGLE_API_KEY}
-      - GOOGLE_MODEL=models/gemini-2.5-pro
+      - GOOGLE_MODEL=models/gemini-2.5-flash
       # Images
       - IMAGE_PROVIDER=pexels
       - PEXELS_API_KEY=${PEXELS_API_KEY}
