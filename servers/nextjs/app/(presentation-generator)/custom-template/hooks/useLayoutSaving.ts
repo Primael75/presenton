@@ -34,10 +34,18 @@ export const useLayoutSaving = (
     setIsSavingLayout(true);
 
     try {
-      const reactComponents = slides.map((slide) => ({
+      const successfulSlides = slides.filter((slide) => slide.processed && slide.react);
+      const skippedCount = slides.length - successfulSlides.length;
+
+      if (!successfulSlides.length) {
+        notify.error("No slides to save", "All slides failed to reconstruct. Retry them before saving.");
+        return null;
+      }
+
+      const reactComponents = successfulSlides.map((slide) => ({
         layout_id: `${slide.slide_number}`,
         layout_name: `Slide${slide.slide_number}`,
-        layout_code: slide.react,
+        layout_code: slide.react!,
       }));
 
 
@@ -76,7 +84,9 @@ export const useLayoutSaving = (
 
       notify.success(
         "Layout saved",
-        `Layout "${layoutName}" was saved successfully.`
+        skippedCount > 0
+          ? `Layout "${layoutName}" was saved with ${successfulSlides.length} of ${slides.length} slides. ${skippedCount} slide(s) were skipped (not reconstructed).`
+          : `Layout "${layoutName}" was saved successfully.`
       );
       closeSaveModal();
       return data.id;
